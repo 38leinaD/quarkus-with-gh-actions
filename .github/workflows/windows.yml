@@ -1,0 +1,22 @@
+# This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java#publishing-using-gradle
+
+name: Gradle Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      uses: DeLaGuardo/setup-graalvm@3
+      with:
+        graalvm-version: '19.3.0.java8'
+    - run: java -version
+    - run: native-image --help

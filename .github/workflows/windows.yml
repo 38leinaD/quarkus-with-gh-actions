@@ -33,10 +33,12 @@ jobs:
     - name: vcvars64.bat
       working-directory: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build
       run: vcvars64.bat
-    - name: Build Native
-      run: gradle build
+    - name: Build Gradle
+      run: gradlew build
     - name: native-image
-      run: $JAVA_HOME\bin\native-image.cmd "-J-Dsun.nio.ch.maxUpdateArraySize=100" "-J-Djava.util.logging.manager=org.jboss.logmanager.LogManager" "-J-Dvertx.logger-delegate-factory-class-name=io.quarkus.vertx.core.runtime.VertxLogDelegateFactory" "-J-Dvertx.disableDnsResolver=true" "-J-Dio.netty.leakDetection.level=DISABLED" "-J-Dio.netty.allocator.maxOrder=1" "-J-Duser.language=en" "-J-Dfile.encoding=Cp1252" "--initialize-at-build-time= "  "-H:InitialCollectionPolicy=com.oracle.svm.core.genscavenge.CollectionPolicy$BySpaceAndTime" "-H:+JNI" -jar quarkus-with-gh-actions-999-SNAPSHOT-runner.jar "-H:FallbackThreshold=0" -H:+ReportExceptionStackTraces -H:-AddAllCharsets -H:-IncludeAllTimeZones -H:-SpawnIsolates -H:-UseServiceLoaderFeature -H:+StackTrace quarkus-with-gh-actions-999-SNAPSHOT-runner
+      run: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
+        $JAVA_HOME\bin\native-image.cmd "-J-Dsun.nio.ch.maxUpdateArraySize=100" "-J-Djava.util.logging.manager=org.jboss.logmanager.LogManager" "-J-Dvertx.logger-delegate-factory-class-name=io.quarkus.vertx.core.runtime.VertxLogDelegateFactory" "-J-Dvertx.disableDnsResolver=true" "-J-Dio.netty.leakDetection.level=DISABLED" "-J-Dio.netty.allocator.maxOrder=1" "-J-Duser.language=en" "-J-Dfile.encoding=Cp1252" "--initialize-at-build-time= "  "-H:InitialCollectionPolicy=com.oracle.svm.core.genscavenge.CollectionPolicy$BySpaceAndTime" "-H:+JNI" -jar quarkus-with-gh-actions-999-SNAPSHOT-runner.jar "-H:FallbackThreshold=0" -H:+ReportExceptionStackTraces -H:-AddAllCharsets -H:-IncludeAllTimeZones -H:-SpawnIsolates -H:-UseServiceLoaderFeature -H:+StackTrace quarkus-with-gh-actions-999-SNAPSHOT-runner
     - name: Upload Release Asset
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1

@@ -30,9 +30,8 @@ jobs:
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary"
     - name: testit
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build"
-    - name: cd vcvars64.bat
-      run: cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build"
     - name: vcvars64.bat
+      working-directory: C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build
       run: vcvars64.bat
     - name: Build Native
       run: gradle build

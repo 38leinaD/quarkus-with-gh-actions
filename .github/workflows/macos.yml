@@ -1,0 +1,37 @@
+# This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java#publishing-using-gradle
+
+name: Windows Build
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 1.8
+      uses: DeLaGuardo/setup-graalvm@3
+      with:
+        graalvm-version: '19.3.0.java11'
+    - name: version
+      run: java -version
+    - name: Build Native
+      run: gradle -Pversion="${{ github.event.release.tag_name }}" buildNative
+    - name: List
+      run: ls -l build
+    - name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: ./build/quarkus-with-gh-actions-${{ github.event.release.tag_name }}-runner
+        asset_name: quarkus-with-gh-actions-${{ github.event.release.tag_name }}-runner_macos
+        asset_label: macos
+        asset_content_type: application/octet-stream

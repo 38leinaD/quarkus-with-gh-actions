@@ -21,7 +21,7 @@ jobs:
     - name: version111
       run: dir $JAVA_HOME/bin
     - name: install native-image
-      run: $JAVA_HOME/bin/gu install native-image
+      run: $JAVA_HOME/bin/gu.cmd install native-image
     - name: version
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio"
     - name: list it

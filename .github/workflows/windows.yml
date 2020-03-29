@@ -19,9 +19,9 @@ jobs:
       with:
         graalvm-version: '19.3.1.java11'
     - name: version
-      run: java -version
+      run: dir C:\Program Files (x86)\Microsoft Visual Studio
     - name: testit
-      run: vcvars64.bat
+      run: C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\Tools\VsDevCmd.bat
     - name: Build Native
       run: gradle build
     - name: native-image

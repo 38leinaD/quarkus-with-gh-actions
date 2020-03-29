@@ -21,7 +21,7 @@ jobs:
     - name: version
       run: java -version
     - name: Build Native
-      run: gradle -Pversion=${{ github.event.release.tag_name }} buildNative
+      run: gradle -Pversion="${{ github.event.release.tag_name }}" buildNative
     - name: List
       run: dir build
     - name: Upload Release Asset

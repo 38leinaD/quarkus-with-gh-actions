@@ -31,7 +31,7 @@ jobs:
     - name: testit
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build"
     - name: Build Gradle
-      run: gradlew build
+      run: gradle build
     - name: native-image
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat"

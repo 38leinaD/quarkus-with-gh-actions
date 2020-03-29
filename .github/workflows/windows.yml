@@ -17,7 +17,7 @@ jobs:
     - name: Set up JDK 1.8
       uses: DeLaGuardo/setup-graalvm@3
       with:
-        graalvm-version: '19.3.0.java11'
+        graalvm-version: '19.3.1.java11'
     - name: version
       run: java -version
     - name: Build Native

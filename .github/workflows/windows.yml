@@ -20,6 +20,8 @@ jobs:
         graalvm-version: '19.3.1.java11'
     - name: version
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio"
+    - name: list it
+      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019"
     - name: testit
       run: cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Auxiliary\Build"
     - name: vcvars64.bat

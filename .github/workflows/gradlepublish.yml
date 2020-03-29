@@ -21,10 +21,8 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Build with Gradle
-      run: gradle build
     - name: Build Native
-      run: gradle buildNative -Dquarkus.native.container-build=true
+      run: gradle build buildNative -Pversion="${{ github.event.release.tag_name }}" -Dquarkus.native.container-build=true
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
@@ -42,6 +40,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ github.event.release.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./build/quarkus-with-gh-actions-1.0.0-SNAPSHOT-runner
+        asset_path: ./build/quarkus-with-gh-actions-${{ github.event.release.tag_name }}-runner
         asset_name: quarkus-with-gh-actions
         asset_content_type: application/octet-stream

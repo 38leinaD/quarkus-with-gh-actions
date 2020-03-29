@@ -20,6 +20,10 @@ jobs:
         graalvm-version: '19.3.0.java11'
     - name: version
       run: java -version
+    - name: install native-image
+      run: gu install native-image
+    - name: list native-image version
+      run: native-image -version
     - name: Build Native
       run: gradle -Pversion="${{ github.event.release.tag_name }}" buildNative
     - name: List

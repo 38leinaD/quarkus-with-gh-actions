@@ -18,10 +18,10 @@ jobs:
       uses: DeLaGuardo/setup-graalvm@3
       with:
         graalvm-version: '20.0.0.java11'
-    - name: version111
-      run: dir $JAVA_HOME/bin
     - name: install native-image
-      run: $JAVA_HOME/bin/gu.cmd install native-image
+      run: |
+        %JAVA_HOME%/bin/gu.cmd install native-image
+      shell: cmd
     - name: version
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio"
     - name: list it

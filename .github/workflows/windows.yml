@@ -17,7 +17,7 @@ jobs:
     - name: Set up JDK 1.8
       uses: DeLaGuardo/setup-graalvm@3
       with:
-        graalvm-version: '19.3.1.java8'
+        graalvm-version: '19.3.1.java11'
     - name: version
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio"
     - name: list it
@@ -38,7 +38,8 @@ jobs:
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64
         REM DA DA
         echo %JAVA_HOME%
-        %JAVA_HOME%\bin\native-image.cmd "-J-Dsun.nio.ch.maxUpdateArraySize=100" "-J-Djava.util.logging.manager=org.jboss.logmanager.LogManager" "-J-Dvertx.logger-delegate-factory-class-name=io.quarkus.vertx.core.runtime.VertxLogDelegateFactory" "-J-Dvertx.disableDnsResolver=true" "-J-Dio.netty.leakDetection.level=DISABLED" "-J-Dio.netty.allocator.maxOrder=1" "-J-Duser.language=en" "-J-Dfile.encoding=Cp1252" "--initialize-at-build-time= "  "-H:InitialCollectionPolicy=com.oracle.svm.core.genscavenge.CollectionPolicy$BySpaceAndTime" "-H:+JNI" -jar build/quarkus-with-gh-actions-999-SNAPSHOT-runner.jar "-H:FallbackThreshold=0" -H:+ReportExceptionStackTraces -H:-AddAllCharsets -H:-IncludeAllTimeZones -H:-SpawnIsolates -H:-UseServiceLoaderFeature -H:+StackTrace quarkus-with-gh-actions-999-SNAPSHOT-runner
+        REM %JAVA_HOME%\bin\native-image.cmd "-J-Dsun.nio.ch.maxUpdateArraySize=100" "-J-Djava.util.logging.manager=org.jboss.logmanager.LogManager" "-J-Dvertx.logger-delegate-factory-class-name=io.quarkus.vertx.core.runtime.VertxLogDelegateFactory" "-J-Dvertx.disableDnsResolver=true" "-J-Dio.netty.leakDetection.level=DISABLED" "-J-Dio.netty.allocator.maxOrder=1" "-J-Duser.language=en" "-J-Dfile.encoding=Cp1252" "--initialize-at-build-time= "  "-H:InitialCollectionPolicy=com.oracle.svm.core.genscavenge.CollectionPolicy$BySpaceAndTime" "-H:+JNI" -jar build/quarkus-with-gh-actions-999-SNAPSHOT-runner.jar "-H:FallbackThreshold=0" -H:+ReportExceptionStackTraces -H:-AddAllCharsets -H:-IncludeAllTimeZones -H:-SpawnIsolates -H:-UseServiceLoaderFeature -H:+StackTrace quarkus-with-gh-actions-999-SNAPSHOT-runner
+        gradlew buildNative
       shell: cmd
     - name: Upload Release Asset
       id: upload-release-asset 

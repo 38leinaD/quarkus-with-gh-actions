@@ -19,10 +19,10 @@ jobs:
       with:
 #        graalvm-version: '19.3.1.java11'
          graalvm-version: '20.0.0.java11'
-#    - name: install native-image
-#      run: |
-#        %JAVA_HOME%/bin/gu.cmd install native-image
-#      shell: cmd
+    - name: install native-image
+      run: |
+        %JAVA_HOME%/bin/gu.cmd install native-image
+      shell: cmd
     - name: version
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio"
     - name: list it

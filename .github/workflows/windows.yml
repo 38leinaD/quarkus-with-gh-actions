@@ -10,7 +10,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-2016
+    runs-on: windows-2019
 
     steps:
     - uses: actions/checkout@v2
@@ -26,18 +26,18 @@ jobs:
     - name: version
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio"
     - name: list it
-      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2017"
+      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019"
     - name: list it1
-      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise"
+      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
     - name: list it2
-      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC"
+      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC"
     - name: list it3
-      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary"
+      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary"
     - name: testit
-      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build"
+      run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build"
     - name: Build Gradle
       run: |
-        call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64
         gradlew build -x check -Dquarkus.package.type=native
       shell: cmd
     - name: Upload Release Asset

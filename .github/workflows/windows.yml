@@ -17,7 +17,8 @@ jobs:
     - name: Set up JDK 1.8
       uses: DeLaGuardo/setup-graalvm@3
       with:
-        graalvm-version: '19.3.1.java11'
+#        graalvm-version: '19.3.1.java11'
+         graalvm-version: '20.0.0.java11'
 #    - name: install native-image
 #      run: |
 #        %JAVA_HOME%/bin/gu.cmd install native-image
@@ -35,7 +36,9 @@ jobs:
     - name: testit
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build"
     - name: Build Gradle
-      run: gradlew build -x check -Dquarkus.package.type=native
+      run: |
+        call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64
+        gradlew build -x check -Dquarkus.package.type=native
       shell: cmd
     - name: Upload Release Asset
       id: upload-release-asset 

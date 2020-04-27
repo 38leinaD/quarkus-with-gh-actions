@@ -37,6 +37,11 @@ jobs:
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build"
     - name: print page size
       run: wmic pagefile list /format:list
+    - name: SetPageFile
+      run: |
+        Invoke-WebRequest http://www.paraglidernc.com/Files/SetPageFile1008.cab -OutFile SetPageFile1008.cab
+        expand.exe SetPageFile1008.cab -F:* C:\
+        C:\files\SetPageFile.exe /f D:\pagefile.sys /m 8192
     - name: Build Gradle
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64

@@ -37,10 +37,8 @@ jobs:
       run: dir "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build"
     - name: print page size
       run: wmic pagefile list /format:list
-    - name: SetPageFile
-      run: |
-        Invoke-Expression ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/al-cheb/PageFile/master/SetPageFileSize.ps1'))
-      shell: powershell
+    - name: configure Pagefile
+      uses: al-cheb/configure-pagefile-action@v1.2
     - name: Build Gradle
       run: |
         call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86_amd64
